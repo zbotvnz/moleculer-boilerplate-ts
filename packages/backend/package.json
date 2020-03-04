@@ -10,6 +10,7 @@
     "start:prod": "moleculer-runner --env services --mask **/*.service.js --config moleculer.config.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@app/models": "*",
     "@app/types": "*",
+    "@types/bcryptjs": "^2.4.2",
     "@types/helmet": "^0.0.45",
     "@types/i18next-node-fs-backend": "^2.1.0",
     "@types/lodash.defaultsdeep": "^4.6.6",

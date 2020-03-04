@@ -24,14 +24,10 @@ export async function authenticate(ctx: Context, _: any, req: any) {
   }
 
   ctx.meta.roles = [ROLE_EVERYONE];
-
-  // FAKE TOKEN
-  token = 'My NICE TOKEN';
   let user!: AdmUsr; // TODO: Use User Type definition
 
   if (token) {
-    // user = await ctx.call('auth.resolveToken', { token });
-    user = { usrId: 1, usrNm: 'lucduong', usrEml: 'luc@ltv.vn', orgId: 1 };
+    user = await ctx.call('auth.resolveToken', { token });
     if (user) {
       // user.roles = await ctx.call(`${SERVICE_USER}.getRolesByUserId`, {
       //   usrId: user.usrId
@@ -62,7 +58,7 @@ export async function authenticate(ctx: Context, _: any, req: any) {
 
       return ctx.meta.user;
     }
-    return undefined;
+    return Promise.reject(new UnAuthorizedError(ERR_INVALID_TOKEN, { token }));;
   }
   return Promise.reject(new UnAuthorizedError(ERR_INVALID_TOKEN, { token }));
 }
